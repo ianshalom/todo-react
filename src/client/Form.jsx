@@ -7,45 +7,57 @@ class Form extends React.Component {
 
         this.state = {
             listItem: "",
-            todoArr:[]
+            todoArr:[],
+            inputClass: 'normal'
         }
     }
 
     handleChange(event) {
-        this.setState({listItem: event.target.value});
-        console.log(this.state.listItem);
+
+        let item = event.target.value;
+        this.setState({listItem: item});
+
+        // this.setState({todoArr: push(this.state.listItem);
+        // console.log(this.state.listItem);
     }
 
-    handleClick() {
-        this.state.todoArr.push(this.state.listItem);
-        event.preventDefault();
-    }
+    handleClick(event) {
+        if(this.state.listItem.length < 1) {
+            this.setState({inputClass: 'error'})
+            alert('Please key in more alphabets');
+        } else {
+                this.state.todoArr.push(this.state.listItem)
+                console.log(this.state.todoArr);
+                event.preventDefault();
+        }
 
+    }
 
 
 
   render() {
-    const list = this.state.todoArr.map((el, index) => {
-        return (
-            <li key={index}>{el}</li>
-            )
-    })
-
+     const list = this.state.todoArr.map((el, index) => {
+            return (
+                <li key={index}>{index + 1}: {el}</li>
+                )
+        })
     return (
-
         <div>
                 <ul>
                     {list}
                 </ul>
-            <form >
+
                 <input
+                    className={this.state.inputClass}
                     onChange={(event) => {this.handleChange(event);}}
                     type='text'
                     value={this.state.listItem}
                 />
-                <button type='submit' onClick={(event) => {this.handleClick(event);}}>Submit
+                <button onClick={(event) => {
+                this.handleClick(event);
+            }}>Submit
                 </button>
-            </form>
+
 
 
         </div>
