@@ -33,12 +33,20 @@ class Form extends React.Component {
 
     }
 
+    deleteListItem(index) {
+        let filtered = [];
+        filtered = this.state.todoArr.slice(0, index).concat(this.state.todoArr.slice(index + 1));
+        this.setState({todoArr: filtered});
+    }
+
 
 
   render() {
      const list = this.state.todoArr.map((el, index) => {
             return (
-                <li key={index}>{el}</li>
+                <div key={index}>
+                <li key={index}>{el} <button key={index} onClick={(event) => { this.deleteListItem(index)}}>Delete</button></li>
+                </div>
                 )
         })
 
