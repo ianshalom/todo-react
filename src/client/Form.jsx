@@ -59,7 +59,7 @@ class Form extends React.Component {
                 this.handleClick(event);
             }}>Submit
                 </button>
-                <TodoItem itemArr={this.state.todoArr} />
+                <TodoItem itemArr={this.state.todoArr} delete={(index) => {this.deleteListItem(index)}}/>
         </div>
         )
       }

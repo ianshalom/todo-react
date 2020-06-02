@@ -20,7 +20,7 @@ const TodoItem = (props) => {
     const item = props.itemArr.map((el, index) => {
             return (
                 <div key={index}>
-                <li key={index}>{el} <button key={index} onClick={(event) => { this.deleteListItem(index)}}>Delete</button></li>
+                <li key={index}>{el} <button key={index} onClick={(event) => { props.delete(index)}}>Delete</button></li>
                 <p>Created at: <Moment parse="YYYY-MM-DD HH:mm">{e}</Moment></p>
                 </div>
                 )
