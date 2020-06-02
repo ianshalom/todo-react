@@ -1,6 +1,8 @@
 import React from 'react';
 import Moment from 'react-moment';
 import TodoItem from './Todoitem';
+import Deleted from './Deleted';
+import style from './style.css';
 
 
 class Form extends React.Component {
@@ -12,7 +14,8 @@ class Form extends React.Component {
             listItem: "",
             todoArr:[],
             inputClass: 'normal',
-            errorMsg: ""
+            errorMsg: "",
+            deleted: []
         }
     }
 
@@ -39,12 +42,18 @@ class Form extends React.Component {
     deleteListItem(index) {
         let filtered = [];
         filtered = this.state.todoArr.slice(0, index).concat(this.state.todoArr.slice(index + 1));
+        this.state.deleted.push(this.state.todoArr[index]);
         this.setState({todoArr: filtered});
+        // console.log("#####################")
+        // console.log(this.state.deleted);
+        // console.log("#####################")
     }
 
   render() {
 
      const message = this.state.errorMsg;
+
+
 
     return (
         <div>
@@ -59,7 +68,10 @@ class Form extends React.Component {
                 this.handleClick(event);
             }}>Submit
                 </button>
+                <h2 style={{textDecoration: 'underline'}}>Todo list</h2>
                 <TodoItem itemArr={this.state.todoArr} delete={(index) => {this.deleteListItem(index)}}/>
+                <h3 style={{textDecoration: 'underline'}}>Deleted Items</h3>
+                <Deleted deletedItems={this.state.deleted} />
         </div>
         )
       }
